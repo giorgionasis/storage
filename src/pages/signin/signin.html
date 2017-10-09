@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Signin</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="signinform" (ngSubmit)="onSignin(signinform.value)">
+   <ion-list>
+      <div *ngIf="username.hasError('required') && username.touched" class="error-box">Username is required</div>
+      <div *ngIf="username.hasError('minlength') && username.touched" class="error-validation">Username is too short</div>
+      <div *ngIf="username.hasError('maxlength') && username.touched" class="error-validation">Username is too long</div>
+     <ion-item [class.error]="!username.valid && username.touched">
+        <ion-input type="username" id="username" placeholder="username" [formControl]="username"></ion-input>  
+     </ion-item>
+     <div *ngIf="password.hasError('required') && password.touched" class="error-box">Password is required</div>
+     <div *ngIf="password.hasError('minlength')" class="error-validation">Password is too short.</div>
+     <div *ngIf="password.hasError('maxlength')" class="error-validation">Password is too short.</div>
+     <ion-item>
+        <ion-input type="password" id="password" placeholder="password" [formControl]="password">
+     </ion-input>
+     </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!signinform.valid">Signin</button>
+    </form>
+    <button ion-button block (click)="goToSignup()">Sign Up</button>
+</ion-content>
+

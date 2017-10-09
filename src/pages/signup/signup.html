@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="signupform" (ngSubmit)="onSignup(signupform.value)">
+    <ion-list>
+        <div *ngIf="username.hasError('required') && username.touched" class="error-box">A username is required</div>
+        <div *ngIf="username.hasError('minlength') && username.touched" class="error-validation">Username is too short</div>
+        <div *ngIf="username.hasError('maxlength') && username.touched" class="error-validation">Username is too long</div>
+      <ion-item>        
+        <ion-input type="username" id="username" placeholder="username" [formControl]="username"></ion-input>
+      </ion-item>
+      <div *ngIf="displayname.hasError('required') && displayname.touched" class="error-box">A display name is required</div>
+      <div *ngIf="displayname.hasError('minlength') && displayname.touched" class="error-validation">Display Name is too short</div>
+      <div *ngIf="displayname.hasError('maxlength') && displayname.touched" class="error-validation">Display Name is too long</div>
+      <ion-item>
+        <ion-input type="diplayname" id="displayname" placeholder="displayname" [formControl]="displayname" ></ion-input>
+      </ion-item>
+      <div *ngIf="email.hasError('required') && email.touched" class="error-box">Please enter your email</div>
+      <div *ngIf="email.hasError('pattern') && email.touched" class="error-box">Please enter a valid email</div>
+      <ion-item>
+          <ion-input type="email" id="email" placeholder="email" [formControl]="email"></ion-input>
+      </ion-item>
+      <div *ngIf="password.hasError('required') && password.touched" class="error-box">A password is required</div>
+      <div *ngIf="password.hasError('minlength') && password.touched" class="error-validation">password is too short</div>
+      <div *ngIf="password.hasError('maxlength') && password.touched" class="error-validation">password is too long</div>
+      <ion-item>
+          <ion-input type="password" id="password" placeholder="password" [formControl]="password"></ion-input>
+      </ion-item>
+      <div *ngIf="signupform.hasError('mismatchedPasswords')">Passwords do not match.</div>
+      <ion-item>
+          <ion-input type="password" id="confirmpassword" placeholder="confirmpassword" [formControl]="confirmpassword"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!signupform.valid">Signup</button>
+  </form>
+</ion-content>
